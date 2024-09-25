@@ -1,0 +1,39 @@
+---
+- name: Example Playbook with Email Notification for Failed Hosts
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Simulate a failure
+      command: /bin/false
+      ignore_errors: yes
+      register: result
+
+    - name: Fail the play if any task fails
+      fail:
+        msg: "Task failed on host {{ inventory_hostname }}"
+      when: result is failed
+
+    - name: Store failed hosts
+      set_fact:
+        failed_hosts_list: "{{ ansible_play_hosts_failed | map('regex_replace', '^.*$', inventory_hostname) | list }}"
+      when: result is failed
+      run_once: true
+
+  handlers:
+    - name: Send email notification on failure
+      mail:
+        host: smtp.example.com
+        port: 587
+        to: "admin@example.com"
+        from: "ansible@example.com"
+        subject: "Ansible Job Failed on {{ failed_hosts_list | join(', ') }}"
+        body: |
+          Hello,
+
+          The Ansible job failed on the following hosts:
+
+          {{ failed_hosts_list | join(', ') }}
+
+          Please check the logs for more details.
+
+      when: failed_hosts_list | length > 0
