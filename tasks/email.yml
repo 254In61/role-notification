@@ -6,10 +6,9 @@
     username: "{{ username }}"
     password: "{{ password }}"
     from: "{{ sender }}"
-    to: "{{ recipient_list }}"  # A list??
+    to: "{{ recipient_list }}"  # A list of email addresses
     subject: "{{ subject }}"
     body: "{{ body }}"
-  # when: failed_hosts_list | length > 0 # Put this on the task
   delegate_to: localhost
   run_once: true
   ignore_errors: true
