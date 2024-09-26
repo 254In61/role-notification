@@ -11,3 +11,5 @@
     body: "{{ body }}"
   # when: failed_hosts_list | length > 0 # Put this on the task
   delegate_to: localhost
+  run_once: true
+  ignore_errors: true
