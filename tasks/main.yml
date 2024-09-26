@@ -1,2 +1,5 @@
 ---
 # tasks file for notification
+- name: Import email tasks
+  ansible.builtin.import_tasks: email.yml
+  when: email | bool

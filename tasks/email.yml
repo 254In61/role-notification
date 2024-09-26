@@ -1,0 +1,13 @@
+---
+- name: Send email notification on failure
+  community.general.mail:
+    host: "{{ mail_host }}"
+    port: "{{ mail_port }}"
+    username: "{{ mail_host_username }}"
+    password: "{{ mail_host_password }}"
+    from: "{{ email_sender }}"
+    to: "{{ email_recipient }}"
+    subject: "{{ email_subject }}"
+    body: "{{ email_body }}"
+  # when: failed_hosts_list | length > 0 # Put this on the task
+  delegate_to: localhost
