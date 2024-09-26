@@ -5,8 +5,8 @@
     port: "{{ port }}"
     username: "{{ username }}"
     password: "{{ password }}"
-    from: "{{ from }}"
-    to: "{{ to }}"
+    from: "{{ sender }}"
+    to: "{{ recipient }}"  # A list??
     subject: "{{ subject }}"
     body: "{{ body }}"
   # when: failed_hosts_list | length > 0 # Put this on the task
