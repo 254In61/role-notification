@@ -1,0 +1,29 @@
+---
+- name: Playbook to configure AAP
+  hosts: localhost
+  gather_facts: false
+ 
+  pre_tasks:
+    - name: Include specific project variables
+      ansible.builtin.include_vars:
+        dir: group_vars
+
+  tasks:
+    !
+    !
+    - name: Import role-notification when there are failures
+      ansible.builtin.import_role:
+        name: role-notification
+      vars:
+        email: true
+        host: "{{ mail_host }}"
+        port:  "{{ mail_port }}"
+        username: "" # email address doesn't need credentials
+        password: "" # email address doesn't need credentials
+        sender: "{{ email_sender }}"
+        recipient_list: "{{ email_recipients }}" # a list of email addresses
+        subject: "{{ email_subject }}"
+        body: "{{ email_body }}"
+      when: failed_hosts | length > 0
+    !
+    !

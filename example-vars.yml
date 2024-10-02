@@ -1,0 +1,22 @@
+---
+# Notification email variables
+# email notifications
+mail_port: 25
+mail_host: mailgw.****.com.au
+email_sender: appc-backup@***.com.au
+email_subject: "APPC NETWORK CONFIG BACKUP REPORT - Failed Hosts - {{ vendor }}"
+email_body: |
+      Dear Ops Team,
+
+      The following {{ vendor }} hosts failed during the playbook run:
+      {% for host in failed_hosts %}
+      - {{ host }}
+      {% endfor %}
+      
+      Check AAP Job run logs for more details.
+
+      Email sent from Ansible Automation Platform
+
+email_recipients: 
+  - opsteam@our-company.com 
+  - nocteam@our-company.com m
