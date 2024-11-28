@@ -9,6 +9,7 @@
     to: "{{ recipient_list }}"  # A list of email addresses
     subject: "{{ subject }}"
     body: "{{ body }}"
+    attach: "{{ attachmemt_list }}"
   delegate_to: localhost
   run_once: true
   ignore_errors: true
