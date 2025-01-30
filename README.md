@@ -12,9 +12,6 @@ Step 2: Define your variables
 Step 3: Call the role from your playbook.
 
 # Example
-
-## varible definition in group_vars/*.yml
-example-vars.yml
   
-##
+## playbook
 example-playbook.yml
